@@ -6,7 +6,7 @@ This branch is using an `npm-shrinkwrap.json` file which is used to force bundly
 to demonstrate the bug when persisting the watchify cache
 
 - do `npm i`
-- verify `watchify` is `2.6.x` doing `npm ls watchify`
+- verify `watchify` is `3.2.x` doing `npm ls watchify`
 - run `npm run build:watch`. Press `ctrl + c` to stop it (this first run will generate the cache)
 - run `npm run build:watch` again to use the cache from the previous run
 - modify any files inside the `src/` folder. You will see that no files trigger the change event because they watchers were not created
