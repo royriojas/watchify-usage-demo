@@ -13,3 +13,11 @@ Simple demo of using [bundly](https://npmjs.org/package/bundly)
 - `npm run changelog` to generate the changelog using changelox
 - `npm run do-changelog` to generate the changelog and commit it
 - `npm run bump` to bump the version
+
+## Changelog
+
+[Changelog](./changelog.md)
+
+## License
+
+[MIT](./LICENSE)
