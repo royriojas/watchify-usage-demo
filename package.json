@@ -37,7 +37,9 @@
     "url": "https://github.com/royriojas/watchify-usage-demo/issues"
   },
   "homepage": "https://github.com/royriojas/watchify-usage-demo",
-  "dependencies": {},
+  "dependencies": {
+    "bundly": "^1.1.2"
+  },
   "devDependencies": {
     "shell-executor": "^0.2.1",
     "bumpery": "^1.0.7",
