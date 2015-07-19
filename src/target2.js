@@ -6,4 +6,6 @@ module.exports = function ( abc, bcd ) {
   console.log( views );
   var react = require( 'react' );
   console.log( react );
+  var win = require( 'window' );
+  console.log( win.name );
 };
