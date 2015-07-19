@@ -11,7 +11,7 @@
     "bundle": "bundly src/foo.js -o dist/foo.js",
     "bundle-config": "bundly -c bundly.conf.js",
     "bundle-watch": "bundly -u -w src/foo.js -o dist/foo.js",
-    "bundle-config-watch": "bundly -c bundly.conf.js b-watch b-cache",
+    "bundle-config-watch": "bundly -c bundly.conf.js -- b-watch b-cache",
     "build": "shell-exec 'npm run bundle' 'npm run bundle-config'",
     "build:watch": "shell-exec 'npm run bundle-watch' 'npm run bundle-config-watch'",
     "changelog": "changelogx -f markdown -o ./changelog.md",
@@ -38,7 +38,8 @@
   },
   "homepage": "https://github.com/royriojas/watchify-usage-demo",
   "dependencies": {
-    "bundly": "^1.1.2"
+    "bundly": "^2.0.0",
+    "consoleify": "^1.1.0"
   },
   "devDependencies": {
     "shell-executor": "^0.2.1",
