@@ -3,21 +3,21 @@ module.exports = function ( cli ) {
   // for example bundly -c bundly-config -- debug b-cache b-watch
   // to enable debug, cache and watch.
   var debug = cli.opts._.indexOf( 'debug' ) > -1;
-  var cache = cli.opts._.indexOf( 'b-cache' ) > -1;
+  var noCache = cli.opts._.indexOf( 'no-cache' ) > -1;
   var watch = cli.opts._.indexOf( 'b-watch' ) > -1;
 
   cli.subtle( 'debug', debug );
-  cli.subtle( 'cache', cache );
+  cli.subtle( 'no-cache', noCache );
   cli.subtle( 'watch', watch );
 
   return {
     src: 'src/target2.js',
     dest: 'dist/target3.js',
     options: {
-      useCache: cache,
+      useCache: !noCache,
       watch: watch,
-      minimize: true,
-      revision: '123',
+      //minimize: true,
+      //revision: '123',
       transforms: {
         babelify: {
           config: {

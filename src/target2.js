@@ -8,4 +8,6 @@ module.exports = function ( abc, bcd ) {
   console.log( react );
   var win = require( 'window' );
   console.log( win.name );
+
+  require( './less/demo.less' );
 };
