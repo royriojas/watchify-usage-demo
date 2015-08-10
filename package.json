@@ -14,10 +14,15 @@
     "bundle-config-watch": "bundly -c bundly.conf.js -- b-watch b-cache",
     "build": "shell-exec 'npm run bundle' 'npm run bundle-config'",
     "build:watch": "shell-exec 'npm run bundle-watch' 'npm run bundle-config-watch'",
+    "verify": "npm run beautify-check && npm run eslint && npm test",
     "changelog": "changelogx -f markdown -o ./changelog.md",
-    "install-hooks": "prepush install && changelogx install-hook",
-    "do-changelog": "npm run changelog && git add ./changelog.md && git commit -m 'DOC: Generate changelog'",
-    "bump": "bumpery --versionType=patch"
+    "do-changelog": "npm run changelog && git add ./changelog.md && git commit -m 'DOC: Generate changelog' --no-verify",
+    "install-hooks": "prepush install && changelogx install-hook && precommit install",
+    "pre-v": "npm run verify",
+    "post-v": "npm run do-changelog && git push --no-verify && git push --tags --no-verify",
+    "bump-major": "npm run pre-v && npm version major -m 'BLD: Release v%s' && npm run post-v",
+    "bump-minor": "npm run pre-v && npm version minor -m 'BLD: Release v%s' && npm run post-v",
+    "bump-patch": "npm run pre-v && npm version patch -m 'BLD: Release v%s' && npm run post-v"
   },
   "prepush": [
     "npm run beautify-check",
@@ -37,17 +42,15 @@
     "url": "https://github.com/royriojas/watchify-usage-demo/issues"
   },
   "homepage": "https://github.com/royriojas/watchify-usage-demo",
-  "dependencies": {
-    "bundly": "^2.0.8"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "bumpery": "^1.0.7",
-    "bundly": "^2.0.2",
-    "changelogx": "^1.0.13",
+    "bundly": "^2.1.0",
+    "changelogx": "^1.0.16",
     "consoleify": "^1.1.0",
-    "esbeautifier": "^3.1.3",
-    "eslinter": "^2.0.1",
-    "prepush": "^2.0.4",
-    "shell-executor": "^0.2.1"
+    "esbeautifier": "^4.2.5",
+    "eslinter": "^2.3.0",
+    "precommit": "^1.1.3",
+    "prepush": "^3.1.2",
+    "shell-executor": "^0.3.0"
   }
 }
