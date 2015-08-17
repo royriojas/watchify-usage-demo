@@ -3,6 +3,8 @@ module.exports = function ( bar, baz ) {
   var foo2 = require( './foo2' )( bar, baz );
   console.log( foo2 );
 
+  require( './less/demo.less' );
+
   var modules = requireArr( 'arr/**/*.js' );
   modules.forEach( function ( m, i ) {
     m.init && m.init( i );

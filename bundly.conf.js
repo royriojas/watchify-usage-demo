@@ -11,36 +11,51 @@ module.exports = function ( cli ) {
   cli.subtle( 'watch', watch );
 
   return {
-    src: 'src/target2.js',
-    dest: 'dist/target3.js',
-    options: {
-      useCache: !noCache,
-      watch: watch,
-      //minimize: true,
-      //revision: '123',
-      transforms: {
-        babelify: {
-          config: {
-            exclude: [
-              //'/module/'
-            ]
-          }
-        },
-        shimixify: {
-          config: {
-            shims: {
-              react: 'global.React'
+    target2: {
+      files: [
+        {
+          src: 'src/foo2.js',
+          dest: 'dist/foo2.js'
+        }
+      ],
+      options: {
+        browerifyOpts: {
+          debug: true
+        }
+      }
+    },
+    target: {
+      src: 'src/target2.js',
+      dest: 'dist/target3.js',
+      options: {
+        useCache: !noCache,
+        watch: watch,
+        //minimize: true,
+        //revision: '123',
+        transforms: {
+          babelify: {
+            config: {
+              exclude: [
+                //'/module/'
+              ]
+            }
+          },
+          shimixify: {
+            config: {
+              shims: {
+                react: 'global.React'
+              }
             }
           }
-        }
-      },
+        },
 
-      preBundleCB: function ( b ) {
-        if ( debug ) {
-          cli.log( 'exposing bar as ./src/bar.js' );
+        preBundleCB: function ( b ) {
+          if ( debug ) {
+            cli.log( 'exposing bar as ./src/bar.js' );
+          }
+          b.transform( require( 'consoleify' ) );
+          b.require( './src/bar.js', { expose: 'bar' } );
         }
-        b.transform( require( 'consoleify' ) );
-        b.require( './src/bar.js', { expose: 'bar' } );
       }
     }
   };
