@@ -19,7 +19,7 @@ module.exports = function ( cli ) {
         }
       ],
       options: {
-        browerifyOpts: {
+        browserifyOpts: {
           debug: true
         }
       }
@@ -30,30 +30,40 @@ module.exports = function ( cli ) {
       options: {
         useCache: !noCache,
         watch: watch,
+        browserifyOpts: {
+          // proper way to ignore the transforms
+          // specified in a package.json file
+          ignoreTransform: [
+            'babelify',
+            'shimixify',
+            'simplessy',
+            'require-arr'
+          ]
+        },
         //minimize: true,
         //revision: '123',
-        transforms: {
-          babelify: {
-            config: {
-              exclude: [
-                //'/module/'
-              ]
-            }
-          },
-          shimixify: {
-            config: {
-              shims: {
-                react: 'global.React'
-              }
-            }
-          }
-        },
-
         preBundleCB: function ( b ) {
           if ( debug ) {
             cli.log( 'exposing bar as ./src/bar.js' );
           }
+
+          // once ignored above
+          // they can be required back here in a different order
+          // or with a different configuration
+          b.transform( require('babelify') );
+          b.transform( require('require-arr') );
+          b.transform( require('simplessy') );
+
+          b.transform( require( 'shimixify').configure( {
+            shims: {
+              window: 'global.window',
+              document: 'global.document',
+              react: 'global.React'
+            }
+          } ))
+
           b.transform( require( 'consoleify' ) );
+
           b.require( './src/bar.js', { expose: 'bar' } );
         }
       }

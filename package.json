@@ -10,7 +10,7 @@
     "lint": "npm run beautify && npm run eslint",
     "bundle": "bundly src/foo.js -o dist/foo.js",
     "bundle-config": "bundly -c bundly.conf.js",
-    "bundle-watch": "bundly -u -w src/foo.js -o dist/foo.js",
+    "bundle-watch": "bundly -w src/foo.js -o dist/foo.js",
     "bundle-config-watch": "bundly -c bundly.conf.js -- b-watch b-cache",
     "build": "shell-exec 'npm run bundle' 'npm run bundle-config'",
     "build:watch": "shell-exec 'npm run bundle-watch' 'npm run bundle-config-watch'",
@@ -23,6 +23,15 @@
     "bump-major": "npm run pre-v && npm version major -m 'BLD: Release v%s' && npm run post-v",
     "bump-minor": "npm run pre-v && npm version minor -m 'BLD: Release v%s' && npm run post-v",
     "bump-patch": "npm run pre-v && npm version patch -m 'BLD: Release v%s' && npm run post-v"
+  },
+  "browserify": {
+    "transform": ["babelify", "require-arr", "shimixify", "simplessy"]
+  },
+  "shimixify": {
+    "shims": {
+      "window": "global.window",
+      "react": "global.React"
+    }
   },
   "prepush": [
     "npm run beautify-check",
@@ -46,13 +55,17 @@
     "bundly": "^3.0.2"
   },
   "devDependencies": {
-    "bundly": "^2.1.0",
+    "babelify": "^6.3.0",
+    "bundly": "^5.0.0",
     "changelogx": "^1.0.16",
-    "consoleify": "^1.1.0",
+    "consoleify": "^1.1.3",
     "esbeautifier": "^4.2.5",
     "eslinter": "^2.3.0",
     "precommit": "^1.1.3",
     "prepush": "^3.1.2",
-    "shell-executor": "^0.3.0"
+    "require-arr": "^1.0.7",
+    "shell-executor": "^0.3.0",
+    "shimixify": "^1.1.5",
+    "simplessy": "^0.1.2"
   }
 }
