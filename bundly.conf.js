@@ -50,17 +50,17 @@ module.exports = function ( cli ) {
           // once ignored above
           // they can be required back here in a different order
           // or with a different configuration
-          b.transform( require('babelify') );
-          b.transform( require('require-arr') );
-          b.transform( require('simplessy') );
+          b.transform( require( 'babelify' ) );
+          b.transform( require( 'require-arr' ) );
+          b.transform( require( 'simplessy' ) );
 
-          b.transform( require( 'shimixify').configure( {
+          b.transform( require( 'shimixify' ).configure( {
             shims: {
               window: 'global.window',
               document: 'global.document',
               react: 'global.React'
             }
-          } ))
+          } ) );
 
           b.transform( require( 'consoleify' ) );
 
