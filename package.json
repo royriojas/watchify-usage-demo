@@ -22,7 +22,9 @@
     "post-v": "npm run do-changelog && git push --no-verify && git push --tags --no-verify",
     "bump-major": "npm run pre-v && npm version major -m 'BLD: Release v%s' && npm run post-v",
     "bump-minor": "npm run pre-v && npm version minor -m 'BLD: Release v%s' && npm run post-v",
-    "bump-patch": "npm run pre-v && npm version patch -m 'BLD: Release v%s' && npm run post-v"
+    "bump-patch": "npm run pre-v && npm version patch -m 'BLD: Release v%s' && npm run post-v",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "browserify": {
     "transform": [
@@ -57,7 +59,8 @@
   },
   "homepage": "https://github.com/royriojas/watchify-usage-demo",
   "dependencies": {
-    "bundly": "^5.1.0"
+    "bundly": "^5.1.0",
+    "snyk": "^1.105.0"
   },
   "devDependencies": {
     "babelify": "^6.3.0",
@@ -72,5 +75,6 @@
     "shell-executor": "^0.3.0",
     "shimixify": "^1.1.5",
     "simplessy": "^0.1.2"
-  }
+  },
+  "snyk": true
 }
